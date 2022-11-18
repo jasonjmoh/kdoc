@@ -1,35 +1,38 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: demo
+  name: java-app
+  labels:
+    app: 3940ass4
 spec:
-  containers:
-  - name: testpod
-    image: comp3940test
-    ports:
-    - containerPort: 8999
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 3940ass4
+  template:
+    metadata:
+      labels:
+        app: 3940ass4
+    spec:
+      containers:
+      - name: 3940ass4
+        image: ryanwo3/csass4
+        ports:
+        - containerPort: 9000
 
-
-# apiVersion: apps/v1
-# 17ad64cd2d35
-# sha256:5ade9a98847661a2ba98b492e6a0b2984494f286beafdefd33c93b8b46351040
-# kind: Deployment
-# metadata:
-#   name: nginx-deployment
-#   labels:
-#     app: nginx
-# spec:
-#   replicas: 3
-#   selector:
-#     matchLabels:
-#       app: nginx
-#   template:
-#     metadata:
-#       labels:
-#         app: nginx
-#     spec:
-#       containers:
-#       - name: nginx
-#         image: nginx:1.14.2
-#         ports:
-#         - containerPort: 8999
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: router
+  labels: 
+   app: 3940ass4
+spec:
+  selector:
+    app: 3940ass4 
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8999 
+      targetPort: 9000
+      nodePort: 30001

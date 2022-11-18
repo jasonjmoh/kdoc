@@ -18,6 +18,12 @@ public class Router extends Thread {
     public void run() {
         System.out.println("MADE A CONNECTION --|-- MADE A CONNECTION");
         try {
+            OutputStream o = socket.getOutputStream();
+            String message = "HTTP/1.1 200 OK";
+            System.out.println(message);
+            for (int i = 0; i < message.length(); i++) {
+                o.write((byte) message.charAt(i));
+            }
             socket.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
