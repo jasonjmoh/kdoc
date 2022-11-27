@@ -5,7 +5,7 @@ import java.net.URL;
 public class Client {
 
     private static final int DEFAULT_NUMBER_REQUEST = 10000;
-    private static final String API_BASE_URL = "http://10.0.0.132:3000/check_in";
+    private static final String API_BASE_URL = "http://192.168.0.248:3000/check_in";
 
     public double makeRequest() {
         try {
